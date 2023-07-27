@@ -25,6 +25,11 @@ const articleSchema = new mongoose.Schema({
     type: String,
     // enum: ['комедия', 'драма', 'боевик', 'триллер', 'документальный'],
     required: false
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true
   }
 });
 
