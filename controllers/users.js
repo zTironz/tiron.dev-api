@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 module.exports.getUsers = (req,res) => {
     User
@@ -34,18 +35,10 @@ module.exports.createUser = (req,res) => {
 
 module.exports.login = (req,res) => {
     const { email, password } = req.body;
-    User.findOne( { email} )
+    return User.findUserByCredentials(email,password)
     .then((user) => {
-        if(!user) {
-            return Promise.reject(new Error('No user'))
-        }
-        return bcrypt.compare(password, user.password)
+        const token = jwt.sign({_id: user._id}, 'secret',{ expiresIn: '1d' })
+        res.send({token})
     })
-    .then((matched) => {
-        if(!matched) {
-            return Promise.reject(new Error('No user'))
-        }
-        res.send("succes")
-    })
-    .catch((err) => res.srarus(401).send({ message: err.message }))
+    .catch((err) => res.status(401).send({ message: err.message }))
 }
