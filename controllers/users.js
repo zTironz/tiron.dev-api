@@ -11,10 +11,10 @@ module.exports.getUsers = (req,res) => {
 
 module.exports.getUser = (req,res) => {
     User
-    .find(req.params._id)
+    .findById(req.params.userId)
     .then((user) => {
         if(!user) {
-            res.status(404).sende({ message: 'No user'})
+            res.status(404).send({ message: 'No user'})
         } else {
             res.send({ user })
         }
@@ -29,7 +29,7 @@ module.exports.createUser = (req,res) => {
         email: req.body.email,
         password: hash
     }))
-    .then((user) => res.status(201).res.send( {name:user.name, email:user.email} ))
+    .then((user) => res.status(201).send( {name:user.name, email:user.email} ))
     .catch((err) => res.status(500).send({ message: err.message }))
 }
 
