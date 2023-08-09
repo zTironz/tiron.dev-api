@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const articlesRoute = require('./routes/articles');
 const usersRoute = require('./routes/users');
@@ -13,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/tirondevapi');
 
