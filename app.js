@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -8,7 +9,7 @@ const articlesRoute = require('./routes/articles');
 const usersRoute = require('./routes/users');
 // const auth = require('./middlewares/auth');
 
-const { PORT = 3000, BASE_PATH } = process.env;
+const { PORT = 3000, DB_URL } = process.env;
 const app = express();
 
 app.use(cors());
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-mongoose.connect('mongodb://localhost:27017/tirondevapi');
+mongoose.connect(DB_URL);
 
 
 
