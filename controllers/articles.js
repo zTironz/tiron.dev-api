@@ -3,7 +3,7 @@ const Article = require('../models/article');
 module.exports.getArticles = (req, res) => {
     Article.find({ })
     .populate('owner', 'name')
-    .then(article => res.send({ article }))
+    .then(articles => res.send({ articles }))
     .catch(() => res.status(500).send({ message: 'Произошла ошибка' }));
 };
 
