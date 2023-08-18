@@ -15,7 +15,7 @@ const { PORT = 3000, DB_URL } = process.env;
 const app = express();
 
 app.use(helmet());
-app.use(limiter);
+// app.use(limiter);
 // app.use(cors({
 //   origin: "*",
 //   credentials: true,
