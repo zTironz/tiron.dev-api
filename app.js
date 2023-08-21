@@ -15,7 +15,9 @@ const { PORT = 3000, DB_URL } = process.env;
 const app = express();
 
 app.use(helmet());
-// app.use(limiter);
+
+//limiter turn off when test backend
+app.use(limiter);
 // app.use(cors({
 //   origin: "*",
 //   credentials: true,
@@ -27,7 +29,7 @@ app.use(function(req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
   next();
 });
 app.use(bodyParser.json());
